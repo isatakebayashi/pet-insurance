@@ -1,0 +1,150 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Address {
+  id: Int!
+  street: String!
+  number: String!
+  complement: String!
+  neighborhood: String!
+  zipcode: String!
+  city: String!
+  state: String!
+  addressType: String!
+  userId: Float!
+}
+
+type Pet {
+  id: Int!
+  type: String!
+  name: String!
+  breed: String!
+  birthDate: DateTime!
+  userId: Float!
+  user: User
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  """Example field (placeholder)"""
+  id: Int!
+  name: String!
+  email: String!
+  password: String!
+  accountId: Float!
+  addresses: [Address!]
+  pets: [Pet!]
+}
+
+type Account {
+  id: Int!
+  name: String!
+  users: [User!]
+}
+
+type Query {
+  accounts: [Account!]!
+  account(id: Int!): Account!
+  users: [User!]!
+  user(id: Int!): User!
+  addresses: [Address!]!
+  address(id: Int!): Address!
+  pets: [Pet!]!
+  pet(id: Int!): Pet!
+}
+
+type Mutation {
+  createAccount(createAccountInput: CreateAccountInput!): Account!
+  updateAccount(updateAccountInput: UpdateAccountInput!): Account!
+  removeAccount(id: Int!): Account!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createAddress(createAddressInput: CreateAddressInput!): Address!
+  updateAddress(updateAddressInput: UpdateAddressInput!): Address!
+  removeAddress(id: Int!): Address!
+  createPet(createPetInput: CreatePetInput!): Pet!
+  updatePet(updatePetInput: UpdatePetInput!): Pet!
+  removePet(id: Int!): Pet!
+}
+
+input CreateAccountInput {
+  """Example field (placeholder)"""
+  name: String!
+}
+
+input UpdateAccountInput {
+  name: String!
+  id: Int!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  accountId: Float!
+  pets: [CreateUserPetInput!]
+}
+
+input CreateUserPetInput {
+  type: String!
+  name: String!
+  breed: String!
+  birthDate: DateTime!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+  accountId: Float
+  pets: [CreateUserPetInput!]
+  id: Int!
+}
+
+input CreateAddressInput {
+  street: String!
+  number: String!
+  complement: String!
+  neighborhood: String!
+  zipcode: String!
+  city: String!
+  state: String!
+  addressType: String!
+  userId: Float!
+}
+
+input UpdateAddressInput {
+  street: String!
+  number: String!
+  complement: String!
+  neighborhood: String!
+  zipcode: String!
+  city: String!
+  state: String!
+  addressType: String!
+  userId: Float!
+  id: Int!
+}
+
+input CreatePetInput {
+  type: String!
+  name: String!
+  breed: String!
+  birthDate: DateTime!
+  userId: Float!
+}
+
+input UpdatePetInput {
+  type: String
+  name: String
+  breed: String
+  birthDate: DateTime
+  userId: Float
+  id: Int!
+}
