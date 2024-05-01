@@ -22,6 +22,12 @@ const addresses_module_1 = require("./addresses/addresses.module");
 const axios_1 = require("@nestjs/axios");
 const rickandmorty_service_1 = require("./rickandmorty.service");
 const pets_module_1 = require("./pets/pets.module");
+const policies_module_1 = require("./policies/policies.module");
+const plans_module_1 = require("./plans/plans.module");
+const coverages_module_1 = require("./coverages/coverages.module");
+const procedures_module_1 = require("./procedures/procedures.module");
+const procedures_by_plan_module_1 = require("./procedures-by-plan/procedures-by-plan.module");
+const plan_coverages_module_1 = require("./plan-coverages/plan-coverages.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -37,7 +43,13 @@ exports.AppModule = AppModule = __decorate([
             users_module_1.UsersModule,
             addresses_module_1.AddressesModule,
             axios_1.HttpModule,
-            pets_module_1.PetsModule
+            pets_module_1.PetsModule,
+            policies_module_1.PoliciesModule,
+            plans_module_1.PlansModule,
+            coverages_module_1.CoveragesModule,
+            procedures_module_1.ProceduresModule,
+            procedures_by_plan_module_1.ProceduresByPlanModule,
+            plan_coverages_module_1.PlanCoveragesModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [

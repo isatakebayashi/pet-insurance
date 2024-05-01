@@ -19,6 +19,12 @@ import { AddressesModule } from './addresses/addresses.module';
 import { HttpModule } from '@nestjs/axios';
 import { RickAndMortyService } from './rickandmorty.service';
 import { PetsModule } from './pets/pets.module';
+import { PoliciesModule } from './policies/policies.module';
+import { PlansModule } from './plans/plans.module';
+import { CoveragesModule } from './coverages/coverages.module';
+import { ProceduresModule } from './procedures/procedures.module';
+import { ProceduresByPlanModule } from './procedures-by-plan/procedures-by-plan.module';
+import { PlanCoveragesModule } from './plan-coverages/plan-coverages.module';
 
 @Module({
   imports: [
@@ -48,7 +54,13 @@ import { PetsModule } from './pets/pets.module';
   //  AuthModule,
     AddressesModule,
     HttpModule,
-    PetsModule
+    PetsModule,
+    PoliciesModule,
+    PlansModule,
+    CoveragesModule,
+    ProceduresModule,
+    ProceduresByPlanModule,
+    PlanCoveragesModule
   ],
   controllers: [AppController],
   providers: [

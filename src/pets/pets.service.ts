@@ -16,7 +16,8 @@ export class PetsService {
   findAll() {
     return this.prismaService.pet.findMany({
       include: {
-        user: true
+        user: true,
+        policy: true
       }
     })
   }
@@ -27,16 +28,30 @@ export class PetsService {
         id
       },
       include: {
-        user: true
+        user: true,
+        policy: true
       }
     })
   }
 
-  update(id: number, updatePetInput: UpdatePetInput) {
-    return `This action updates a #${id} pet`;
+  async update(id: number, updatePetInput: UpdatePetInput) {
+    return await this.prismaService.pet.update({
+      where: {
+        id
+      },
+      data: {
+        name: updatePetInput.name,
+        breed: updatePetInput.breed,
+        birthDate: updatePetInput.birthDate
+      }
+    })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pet`;
+  async remove(id: number) {
+    return await this.prismaService.pet.delete({
+      where: {
+        id
+      }
+    })
   }
 }

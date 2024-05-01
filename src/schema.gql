@@ -47,6 +47,63 @@ type Account {
   users: [User!]
 }
 
+type ProcedureByPlan {
+  id: Int!
+  availableLimit: String!
+  share: Float!
+  valueToAnticipate: Float
+  procedureId: Float!
+  procedure: Procedure
+  planId: Float!
+  plan: Plan
+}
+
+type Procedure {
+  id: Int!
+  name: String!
+  description: String!
+  coverageId: Float!
+  coverage: Coverage
+  proceduresByPlan: [ProcedureByPlan!]
+}
+
+type Coverage {
+  id: Int!
+  name: String!
+  procedures: [Procedure!]
+  coverages: [PlanCoverage!]
+}
+
+type PlanCoverage {
+  id: Int!
+  planId: Float!
+  plan: Plan
+  coverageId: Float!
+  coverage: Coverage
+}
+
+type Plan {
+  id: Int!
+  name: String!
+  description: String!
+  value: Float!
+  policies: [Policy!]!
+  proceduresByPlan: [ProcedureByPlan!]
+  coverages: [PlanCoverage!]
+}
+
+type Policy {
+  id: Int!
+  pet: Pet!
+  petId: Float!
+  microchipNumber: String!
+  status: String!
+  initialGraceDate: DateTime!
+  renewalOfLimits: DateTime!
+  plan: Plan!
+  planId: Float!
+}
+
 type Query {
   accounts: [Account!]!
   account(id: Int!): Account!
@@ -56,6 +113,19 @@ type Query {
   address(id: Int!): Address!
   pets: [Pet!]!
   pet(id: Int!): Pet!
+  policies: [Policy!]!
+  policy(id: Int!): Policy!
+  plans: [Plan!]!
+  plan(id: Int!): Plan!
+  coverages: [Coverage!]!
+  coverage(id: Int!): Coverage!
+  procedures: [Procedure!]!
+  procedure(id: Int!): Procedure!
+  proceduresByPlan: [ProcedureByPlan!]!
+  procedureByPlan(id: Int!): ProcedureByPlan!
+  proceduresByPlanId(planId: Int!): [ProcedureByPlan!]!
+  planCoverages: [PlanCoverage!]!
+  planCoverage(id: Int!): PlanCoverage!
 }
 
 type Mutation {
@@ -71,6 +141,24 @@ type Mutation {
   createPet(createPetInput: CreatePetInput!): Pet!
   updatePet(updatePetInput: UpdatePetInput!): Pet!
   removePet(id: Int!): Pet!
+  createPolicy(createPolicyInput: CreatePolicyInput!): Policy!
+  updatePolicy(updatePolicyInput: UpdatePolicyInput!): Policy!
+  removePolicy(id: Int!): Policy!
+  createPlan(createPlanInput: CreatePlanInput!): Plan!
+  updatePlan(updatePlanInput: UpdatePlanInput!): Plan!
+  removePlan(id: Int!): Plan!
+  createCoverage(createCoverageInput: CreateCoverageInput!): Coverage!
+  updateCoverage(updateCoverageInput: UpdateCoverageInput!): Coverage!
+  removeCoverage(id: Int!): Coverage!
+  createProcedure(createProcedureInput: CreateProcedureInput!): Procedure!
+  updateProcedure(updateProcedureInput: UpdateProcedureInput!): Procedure!
+  removeProcedure(id: Int!): Procedure!
+  createProceduresByPlan(createProcedureByPlanInput: CreateProcedureByPlanInput!): ProcedureByPlan!
+  updateProceduresByPlan(updateProcedureByPlanInput: UpdateProcedureByPlanInput!): ProcedureByPlan!
+  removeProceduresByPlan(id: Int!): ProcedureByPlan!
+  createPlanCoverage(createPlanCoverageInput: CreatePlanCoverageInput!): PlanCoverage!
+  updatePlanCoverage(updatePlanCoverageInput: UpdatePlanCoverageInput!): PlanCoverage!
+  removePlanCoverage(id: Int!): PlanCoverage!
 }
 
 input CreateAccountInput {
@@ -146,5 +234,79 @@ input UpdatePetInput {
   breed: String
   birthDate: DateTime
   userId: Float
+  id: Int!
+}
+
+input CreatePolicyInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdatePolicyInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreatePlanInput {
+  name: String!
+  description: String!
+  value: Float!
+}
+
+input UpdatePlanInput {
+  name: String
+  description: String
+  value: Float
+  id: Int!
+}
+
+input CreateCoverageInput {
+  name: String!
+}
+
+input UpdateCoverageInput {
+  name: String
+  id: Int!
+}
+
+input CreateProcedureInput {
+  name: String!
+  description: String!
+  coverageId: Float!
+}
+
+input UpdateProcedureInput {
+  name: String
+  description: String
+  coverageId: Float
+  id: Int!
+}
+
+input CreateProcedureByPlanInput {
+  availableLimit: String!
+  share: Float!
+  valueToAnticipate: Float
+  procedureId: Float!
+  planId: Float!
+}
+
+input UpdateProcedureByPlanInput {
+  availableLimit: String
+  share: Float
+  valueToAnticipate: Float
+  procedureId: Float
+  planId: Float
+  id: Int!
+}
+
+input CreatePlanCoverageInput {
+  planId: Float!
+  coverageId: Float!
+}
+
+input UpdatePlanCoverageInput {
+  planId: Float
+  coverageId: Float
   id: Int!
 }

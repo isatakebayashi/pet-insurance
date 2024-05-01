@@ -54,6 +54,24 @@ export declare class PetsResolver {
         createdAt: Date;
         updatedAt: Date;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
-    updatePet(updatePetInput: UpdatePetInput): string;
-    removePet(id: number): string;
+    updatePet(updatePetInput: UpdatePetInput): Promise<{
+        id: number;
+        type: string;
+        name: string;
+        breed: string;
+        birthDate: Date;
+        userId: number;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    removePet(id: number): Promise<{
+        id: number;
+        type: string;
+        name: string;
+        breed: string;
+        birthDate: Date;
+        userId: number;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
 }

@@ -38,11 +38,24 @@ let PetsService = class PetsService {
             }
         });
     }
-    update(id, updatePetInput) {
-        return `This action updates a #${id} pet`;
+    async update(id, updatePetInput) {
+        return await this.prismaService.pet.update({
+            where: {
+                id
+            },
+            data: {
+                name: updatePetInput.name,
+                breed: updatePetInput.breed,
+                birthDate: updatePetInput.birthDate
+            }
+        });
     }
-    remove(id) {
-        return `This action removes a #${id} pet`;
+    async remove(id) {
+        return await this.prismaService.pet.delete({
+            where: {
+                id
+            }
+        });
     }
 };
 exports.PetsService = PetsService;

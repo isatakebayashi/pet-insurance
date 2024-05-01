@@ -54,6 +54,24 @@ export declare class PetsService {
         createdAt: Date;
         updatedAt: Date;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
-    update(id: number, updatePetInput: UpdatePetInput): string;
-    remove(id: number): string;
+    update(id: number, updatePetInput: UpdatePetInput): Promise<{
+        id: number;
+        type: string;
+        name: string;
+        breed: string;
+        birthDate: Date;
+        userId: number;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    remove(id: number): Promise<{
+        id: number;
+        type: string;
+        name: string;
+        breed: string;
+        birthDate: Date;
+        userId: number;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
 }

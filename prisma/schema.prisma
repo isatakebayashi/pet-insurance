@@ -43,7 +43,7 @@ model Policy {
   id Int @default(autoincrement()) @id
   pet Pet @relation(fields: [petId], references: [id])
   petId Int @unique
-  microchipNumber String
+  microchipNumber String @default(uuid())
   status String
   initialGraceDate DateTime
   renewalOfLimits Int
@@ -51,6 +51,7 @@ model Policy {
   planId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  policyCoverages PolicyProcedure[]
 }
 
 model Plan {
@@ -61,7 +62,53 @@ model Plan {
   policies Policy[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  // coverages
+  proceduresByPlan ProcedureByPlan[]
+  coverages PlanCoverage[]
+}
+
+model PlanCoverage {
+  id Int @default(autoincrement()) @id
+  planId Int
+  plan Plan @relation(fields: [planId], references: [id])
+  coverageId Int
+  coverage Coverage @relation(fields: [coverageId], references: [id])
+}
+
+model Coverage {
+  id Int @default(autoincrement()) @id
+  name String
+  plans PlanCoverage[]
+  procedures Procedure[]
+}
+
+model Procedure {
+  id Int @default(autoincrement()) @id
+  name String
+  description String
+  coverageId Int
+  coverage Coverage @relation(fields: [coverageId], references: [id])
+  proceduresByPlan ProcedureByPlan[]
+  policiesProcedure PolicyProcedure[]
+}
+
+model ProcedureByPlan {
+  id Int @default(autoincrement()) @id
+  availableLimit String
+  share Float
+  valueToAnticipate Float?
+  procedureId Int
+  procedure Procedure @relation(fields: [procedureId], references: [id])
+  planId Int
+  plan Plan @relation(fields: [planId], references: [id])
+}
+
+model PolicyProcedure {
+  id Int @default(autoincrement()) @id
+  policyId Int
+  policy Policy @relation(fields: [policyId], references: [id])
+  procedureId Int
+  procedure Procedure @relation(fields: [procedureId], references: [id])
+  used Int
 }
 
 model Account {
